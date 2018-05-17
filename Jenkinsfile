@@ -3,19 +3,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'make package'
+                sh 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
-                sh 'make check'
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
             when { tag "release-*" }
             steps {
                 echo 'Deploying only because this commit is tagged...'
-                sh 'make deploy'
+                sh 'mvn deploy'
             }
         }
     }
