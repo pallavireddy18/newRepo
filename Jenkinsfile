@@ -18,5 +18,14 @@ pipeline {
                 bat 'mvn deploy'
             }
         }
+        stage('emailNotification'){
+		    steps{
+			    emailext ( 
+		       subject: "Job Build", 
+		       body: "Job Build Success.${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+		       to: "badal.singh2432@gmail.com,pallavireddy.s18995@gmail.com"
+		     )
+		    }
+	    }
     }
 }
